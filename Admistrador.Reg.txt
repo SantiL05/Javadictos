@@ -1,0 +1,125 @@
+import java.sql.SQLException;
+import java.util.Scanner;
+import java.sql;
+import java.util.Scanner;
+import java.sql.ResultSet;
+
+
+
+public class AdministradorReg {
+	private Usuario admin;
+	private int opcion;
+	private Conexion;
+	
+	public InicioAdministradorReg(Usuario admin) {
+		this.admin=admin;
+		this.opcion=0;
+		this.Conexion=new Conexion();
+	}
+	public InicioAdministrador() {
+	}
+
+	public Usuario getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Usuario admin) {
+		this.admin = admin;
+	}
+
+	public int getOpcion() {
+		return opcion;
+	}
+
+	public void setOpcion(int opcion) {
+		this.opcion = opcion;
+	}
+
+	public Conexion getConexion() {
+		return Conexion;
+	}
+
+	public void setConexion(Conexion conexion) {
+		this.Conexion = Conexion;
+	}
+	
+public void Administracion_Control() throws SQLException {
+	
+
+		System.out.println("=============================== MENU ADMINISTRADOR CINEMAR ===============================\n");
+		System.out.println("                1 - Ver Reservas Clientes.");
+		System.out.println(" 				2 - Ver Reservas Cliente Particular");
+		System.out.println(" 				3 - Crear una Sala con la Pelicula");
+		System.out.println(" 				4 - Modificar una Sala");
+		System.out.println(" 				5 - Eliminar una Sala");
+		System.out.println(" 				6 - Modificar Descuentos");
+	
+			
+		
+		Scanner teclado = new Scanner(System.in);
+		 int opcion=teclado.nextInt();
+		
+		switch (opcion) {
+		case 1 : 
+			Conexion Conexion = new Conexion();	
+			String sql = "select * from reservas";
+			
+			ResultSet rs = Conexion.devuelveConsulta(sql);
+			
+			while(rs.next()) {
+				int Id_Reserva= rs.getInt("Id_Reserva");
+				String Fecha_Recerva= rs.getString("Fecha_Recerva");
+				int Total = rs.getInt("Total");
+				int Id_pelicula= rs.getInt("Id_pelicula");
+				int Id_usuario= rs.getInt("Id_usuario");
+				int Porcentaje_descuento= rs.getInt("Porcentaje_descuento");
+				String Dia_desc= rs.getInt("Dia_desc");
+				
+				System.out.println("Id_Reserva: "+Id_Reserva);
+				System.out.println("Fecha: "+Fecha);
+				System.out.println("Total: "+Total);
+				System.out.println("Id_pelicula: "+Id_pelicula);
+				System.out.println("Id_usuario:"+Id_usuario);
+				System.out.println("Porcentaje_descuento: "+Porcentaje_descuento);
+				System.out.println("Dia_desc: "+Dia_desc);
+				System.out.println();}
+			break;
+		case 2 : 
+		
+			System.out.println("Ingrese Id Cliente: ");
+			Scanner entrada = new Scanner(System.in);
+			int opc = entrada.nextInt();
+			Conexion conexion = new Conexion();
+			String sql2 = "select * from reserva where Id_Reserva = " + "'"+opc+"';";
+			
+			ResultSet rs2 = Conexion .devuelveConsulta(sql2);
+			
+			while(rs2.next()) {
+				
+				int Id_Reserva2= rs2.getInt("Id_Reserva");
+				String Fecha_Recerva2= rs2.getString("Fecha");
+				int Id_usuario2= rs2.getInt("Id_Usuario");
+				int Porcentaje_descuento2= rs2.getInt("Id_Descuento");
+				int Id_pelicula2= rs2.getInt("Id_pelicula");
+				
+				System.out.println("Id_Reserva:"+id2 );
+				System.out.println("Fecha:"+fecha2);
+				System.out.println("Id Descuento:"+des2 );
+				System.out.println("Id Usuario:"+iduser2);
+				System.out.println("Id Descuento:"+iddesc2 );
+				System.out.println("Id Sala: "+idsala2);
+				System.out.println();
+				
+			}
+			
+			
+			
+			
+			break;
+		default:
+			System.out.println("Error algo esta mal...");
+		}
+	}
+
+
+}
